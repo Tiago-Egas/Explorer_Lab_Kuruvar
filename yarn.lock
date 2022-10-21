@@ -47,6 +47,11 @@
   dependencies:
     "function-bind" "^1.1.1"
 
+"imask@^6.4.3":
+  "integrity" "sha512-aH2GHemGkr3cbRBfhogHMIx05eUxdHrZNlKTTLmz8VxpSopuHHJ8+85FsDlBVQqxPlDLhZuwj4lpHHWbLOdBSw=="
+  "resolved" "https://registry.npmjs.org/imask/-/imask-6.4.3.tgz"
+  "version" "6.4.3"
+
 "is-core-module@^2.9.0":
   "integrity" "sha512-RRjxlvLDkD1YJwDbroBHMb+cukurkDWNyHx7D3oNB5x9rb5ogcksMC5wHCadcXoo67gVr/+3GFySh3134zi6rw=="
   "resolved" "https://registry.npmjs.org/is-core-module/-/is-core-module-2.11.0.tgz"
