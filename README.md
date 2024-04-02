@@ -47,4 +47,4 @@ Esse projeto está sob a licença MIT.
 
 Feito com ♥ by Rocketseat :wave: [Participe da nossa comunidade!](https://discord.gg/rocketseat)
 
-Meu perfil na Rocketseat: (https://app.rocketseat.com.br/me/tiago-egas-08359).
+Meu perfil no Github: (https://github.com/tiago-egas).
