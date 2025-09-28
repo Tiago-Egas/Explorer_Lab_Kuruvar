@@ -1,26 +1,27 @@
 import "./css/index.css";
 import IMask from "imask";
 
-const ccBgColor01 = document.querySelector(
-  ".cc-bg svg > g g:nth-child(1) path"
-);
-const ccBgColor02 = document.querySelector(
-  ".cc-bg svg > g g:nth-child(2) path"
-);
+const ccBgColor01 = document.getElementById("cc-bg-path-1");
+const ccBgColor02 = document.getElementById("cc-bg-path-2");
 const ccLogo = document.querySelector(".cc-logo > span span:nth-child(2) img");
 
 function setCardType(type) {
   const colors = {
     default: ["black", "gray"],
-    visa: ["#436S99", "#2D57F2"],
-    mastercard: ["#DF629", "#C69347"],
-    googlepay: ["#FFFFFF", "#34A853"],
-    paypal: ["#222D65", "#179BD7"],
+    visa: ["#192061", "#1336CC"],
+    mastercard: ["#EB001B", "#FF5F00"],
+    amex: ["#016FD0", "#1D8ECE"],
+    discover: ["#FF5F00", "#F9A021"],
+    elo: ["#000000", "#ffd033"],
+    hipercard: ["#cc0000", "#ffffff"],
+    diners: ["#0079BE", "#ffffff"],
   };
 
-  ccBgColor01.setAttribute("fill", colors[type][0]);
-  ccBgColor02.setAttribute("fill", colors[type][1]);
-  ccLogo.setAttribute("src", `./public/cc-${type}.svg`);
+  const selectedColor = colors[type] || colors.default;
+
+  ccBgColor01.setAttribute("fill", selectedColor[0]);
+  ccBgColor02.setAttribute("fill", selectedColor[1]);
+  ccLogo.setAttribute("src", `./public/cc-${type || "default"}.svg`);
 }
 
 // globalThis.setCardType = setCardType;
@@ -65,21 +66,37 @@ const cardNumberPattern = {
       cctype: "mastercard",
     },
     {
-      mask: "0000 0000 0000 0000",
-      regex: /^[98]\d{0,14}/,
-      cctype: "paypal",
+      mask: "0000 000000 00000",
+      regex: /^3[47]\d{0,13}/,
+      cctype: "amex",
     },
     {
       mask: "0000 0000 0000 0000",
-      regex: /^[78]\d{0,14}/,
-      cctype: "googlepay",
+      regex: /^6(?:011|5[0-9]{2})[0-9]{0,12}/,
+      cctype: "discover",
     },
     {
       mask: "0000 0000 0000 0000",
+      regex: /^(506699|5067|509|627780|401178|431274|636368)\d{0,10}/,
+      cctype: "elo",
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      regex: /^(606282|3841)\d{0,12}/,
+      cctype: "hipercard",
+    },
+    {
+      mask: "0000 000000 0000",
+      regex: /^(30[0-5]|36|38|39)\d{0,11}/,
+      cctype: "diners",
+    },
+    {
+      mask: "0000 0000 0000 0000",
+      regex: /.*/,
       cctype: "default",
     },
   ],
-  dispach: function (appended, dynamicMasked) {
+  dispatch: function (appended, dynamicMasked) {
     const number = (dynamicMasked.value + appended).replace(/\D/g, "");
     const foundMask = dynamicMasked.compiledMasks.find(function (item) {
       return number.match(item.regex);
@@ -133,6 +150,6 @@ expirationDateMasked.on("accept", () => {
 });
 
 function updateExpirationDate(date) {
-  const ccExpiration = document.querySelector(".cc-extra .value");
+  const ccExpiration = document.querySelector(".cc-expiration .value");
   ccExpiration.innerHTML = date.length === 0 ? "MM/YY" : date;
 }
